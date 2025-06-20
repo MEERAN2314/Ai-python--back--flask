@@ -35,7 +35,7 @@ def login():
  
 
 
-genai.configure(api_key="AIzaSyC10gnIogn1voJf0TqVInQzfKnYJdON76A")
+genai.configure(api_key=os.getenv("GEMINI_API_KEY"))
 model = genai.GenerativeModel("gemini-1.5-flash")
 
 
@@ -354,10 +354,7 @@ def cleanup_cache():
         question_cache.clear()
 
 if __name__ == "__main__":
-    try:
-        port = int(os.environ.get("PORT", 5000))
-        app.run(host="0.0.0.0", port=port, debug=True)
-    except Exception as e:
-        print(f"Failed to start server: {e}")
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host="0.0.0.0", port=port)
         
     app.run(debug=True)
